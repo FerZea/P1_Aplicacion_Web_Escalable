@@ -15,14 +15,6 @@ export class AuthService {
 
   user = this.currentUser.asReadonly();
 
-  selectProfile(role: 'user' | 'admin'): void {
-    const selectedUser = this.users.find((user) => user.role === role);
-
-    if (selectedUser) {
-      this.currentUser.set(selectedUser);
-    }
-  }
-
   logout(): void {
     this.currentUser.set(null);
   }

@@ -1,12 +1,5 @@
 <section class="panel form-panel">
   <h1>Add resource</h1>
-  @if (!user()) {
-    <p class="message muted">
-      You can view this form without logging in. To try publishing, choose a demo profile on
-      <a class="text-link" routerLink="/login">Login</a>
-      .
-    </p>
-  }
 
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="form-field">
@@ -91,9 +84,11 @@
     }
 
     <div class="actions">
-      <button class="btn btn-primary" type="submit" [disabled]="!user()">Publish</button>
+      <button class="btn btn-primary" type="submit">Validate resource form</button>
       <a class="btn" routerLink="/home">Cancel</a>
     </div>
   </form>
-  <p class="message muted">The resource is saved temporarily until you reload the page.</p>
+  @if (validated) {
+    <p class="message" role="status">Valid details. Resource publishing is not available yet.</p>
+  }
 </section>

@@ -1,9 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
-import { Resource } from '../../interfaces/resource.interface';
-import { AuthService } from '../../services/auth.service';
 import { ResourcesService } from '../../services/resources.service';
 
 @Component({
@@ -14,15 +12,13 @@ import { ResourcesService } from '../../services/resources.service';
 })
 export class ResourceForm {
   private catalog = inject(ResourcesService);
-  private auth = inject(AuthService);
-  private router = inject(Router);
 
-  user = this.auth.user;
   categories = this.catalog.categories;
   resourceTypes = this.catalog.resourceTypes;
   tags = this.catalog.tags;
 
   error = '';
+  validated = false;
 
   form = new FormGroup({
     title: new FormControl('', {
@@ -55,16 +51,10 @@ export class ResourceForm {
 
   onSubmit(): void {
     this.error = '';
+    this.validated = false;
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      return;
-    }
-
-    const author = this.auth.user();
-
-    if (!author) {
-      this.error = 'Choose a demo profile before publishing.';
       return;
     }
 
@@ -89,22 +79,6 @@ export class ResourceForm {
       return;
     }
 
-    const newResource: Resource = {
-      id: 0,
-      title: title,
-      url: url,
-      description: description,
-      category: values.category,
-      resourceType: values.resourceType,
-      tags: values.tags,
-      imageUrl: imageUrl,
-      author: author,
-      createdAt: new Date().toISOString().slice(0, 10),
-    };
-
-    const savedResource = this.catalog.addResource(newResource);
-
-    this.catalog.clearFilters();
-    this.router.navigate(['/resources', savedResource.id]);
+    this.validated = true;
   }
 }

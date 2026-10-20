@@ -1,8 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
-
-import { AuthService } from '../../services/auth.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +9,6 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './login.css',
 })
 export class Login {
-  private auth = inject(AuthService);
-  private router = inject(Router);
-
   validated = false;
 
   form = new FormGroup({
@@ -36,10 +31,5 @@ export class Login {
     }
 
     this.validated = true;
-  }
-
-  selectProfile(role: 'user' | 'admin'): void {
-    this.auth.selectProfile(role);
-    this.router.navigate(['/home']);
   }
 }

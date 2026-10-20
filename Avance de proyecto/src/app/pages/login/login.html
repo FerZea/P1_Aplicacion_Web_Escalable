@@ -37,9 +37,7 @@
     <button class="btn btn-primary" type="submit">Validate login form</button>
 
     @if (validated) {
-      <p class="message" role="status">
-        Valid details. Choose a demo profile below to preview the pages.
-      </p>
+      <p class="message" role="status">Valid details. Sign-in is not available yet.</p>
     }
   </form>
 
@@ -47,14 +45,4 @@
     Don't have an account?
     <a class="text-link" routerLink="/register">Register</a>
   </p>
-
-  <hr />
-
-  <p>Preview a demo profile:</p>
-
-  <div class="demo-buttons">
-    <button class="btn btn-sm" type="button" (click)="selectProfile('user')">Preview user</button>
-
-    <button class="btn btn-sm" type="button" (click)="selectProfile('admin')">Preview admin</button>
-  </div>
 </section>
