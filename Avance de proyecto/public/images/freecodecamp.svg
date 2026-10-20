@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="220" viewBox="0 0 300 220">
+  <rect width="300" height="220" fill="#c9cdbb" />
+  <text
+    x="150"
+    y="120"
+    text-anchor="middle"
+    font-family="Arial,sans-serif"
+    font-size="27"
+    fill="#3f3a3a"
+  >
+    freeCodeCamp
+  </text>
+</svg>

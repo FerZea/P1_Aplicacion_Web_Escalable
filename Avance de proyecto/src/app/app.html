@@ -1,0 +1,75 @@
+<nav class="navbar site-navbar" aria-label="Main navigation">
+  <a class="brand" routerLink="/home" (click)="clearFilters()" aria-label="FreeHub, home">FH</a>
+
+  <details class="dropdown" #categoryMenu>
+    <summary class="btn btn-ghost">Categories</summary>
+    <ul class="menu dropdown-content">
+      <li>
+        <button type="button" (click)="filterCategory(''); categoryMenu.open = false">All</button>
+      </li>
+      @for (category of categories; track category) {
+        <li>
+          <button type="button" (click)="filterCategory(category); categoryMenu.open = false">
+            {{ category }}
+          </button>
+        </li>
+      }
+    </ul>
+  </details>
+
+  <details class="dropdown" #tagMenu>
+    <summary class="btn btn-ghost">Tags</summary>
+    <ul class="menu dropdown-content">
+      <li>
+        <button type="button" (click)="filterTag(''); tagMenu.open = false">All</button>
+      </li>
+      @for (tag of tags; track tag) {
+        <li>
+          <button type="button" (click)="filterTag(tag); tagMenu.open = false">
+            {{ tag }}
+          </button>
+        </li>
+      }
+    </ul>
+  </details>
+
+  <form class="search-form" (submit)="$event.preventDefault(); search(searchInput.value)">
+    <input
+      class="input input-sm"
+      #searchInput
+      type="search"
+      [value]="searchText()"
+      placeholder="Search"
+      aria-label="Search by title"
+    />
+    <button class="btn btn-sm" type="submit">Search</button>
+  </form>
+
+  @if (user(); as currentUser) {
+    <span>{{ currentUser.name }}</span>
+    @if (currentUser.role === 'admin') {
+      <a
+        class="btn btn-sm"
+        routerLink="/admin"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        Admin panel
+      </a>
+    }
+    <button class="btn btn-sm" type="button" (click)="logout()">Log out</button>
+  } @else {
+    <a
+      class="btn btn-primary btn-sm"
+      routerLink="/login"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      Login
+    </a>
+  }
+</nav>
+
+<main class="container">
+  <router-outlet />
+</main>

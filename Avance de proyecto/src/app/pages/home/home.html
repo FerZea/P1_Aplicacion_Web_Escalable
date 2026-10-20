@@ -1,0 +1,35 @@
+<div class="home-heading">
+  <h1>Recent resources</h1>
+  @if (user()) {
+    <a class="btn btn-primary" routerLink="/resources/new">+ Add resource</a>
+  }
+</div>
+
+<div class="filters">
+  <label for="type-filter">Resource type:</label>
+  <select
+    class="select select-sm"
+    id="type-filter"
+    #typeFilter
+    [value]="resourceType()"
+    (change)="filterType(typeFilter.value)"
+  >
+    <option value="">All</option>
+    @for (type of resourceTypes; track type) {
+      <option [value]="type">{{ type }}</option>
+    }
+  </select>
+  <button class="btn btn-sm" type="button" (click)="clearFilters()">Clear filters</button>
+</div>
+
+@if (category() || tag()) {
+  <p class="selected-filters">Category: {{ category() || 'All' }} · Tag: {{ tag() || 'All' }}</p>
+}
+
+<section class="resource-list" aria-label="Resources">
+  @for (resource of resources(); track resource.id) {
+    <app-resource-card [resource]="resource" />
+  } @empty {
+    <p>No resources found.</p>
+  }
+</section>

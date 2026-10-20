@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="220" viewBox="0 0 300 220">
+  <rect width="300" height="220" fill="#d6d8d9" />
+  <text
+    x="150"
+    y="125"
+    text-anchor="middle"
+    font-family="Arial,sans-serif"
+    font-size="44"
+    fill="#3f3a3a"
+  >
+    MDN
+  </text>
+</svg>
